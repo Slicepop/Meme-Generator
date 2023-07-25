@@ -1,15 +1,18 @@
-/**
- * Challenge: 
- * - Create a Meme component.
- * - Inside the Meme component, render a styled form
- *   with our 2 inputs and the button.
- * - Don't worry about adding any functionality yet
- */
+import { useState } from 'react';
+import memesData from "/src/memesData.js"
+
 
 export default function Meme() {
+    function getRandomInt(max) {
+        return Math.floor(Math.random() * max);
+      }
+    const [imgSrc, setImgSrc] = useState(0);
+    function newImg(){
+        setImgSrc(memesData.data.memes[getRandomInt(100)].url)
+    }
     return (
         <main>
-            <form className="form">
+            <div className="form">
                 <input 
                     type="text"
                     placeholder="Top text"
@@ -22,10 +25,15 @@ export default function Meme() {
                 />
                 <button 
                     className="form--button"
+                    onClick={newImg}
                 >
                     Get a new meme image 🐱‍🐉
                 </button>
-            </form>
+            </div>
+            <div className="meme">
+
+                <img src={imgSrc} alt="meme" />
+            </div>
         </main>
     )
 }
